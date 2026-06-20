@@ -1,0 +1,213 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Morph
+providerId: morph-labs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Code Editing
+- Fast Apply
+- Embeddings
+- Sandboxes
+- Plans
+description: >-
+  Morph combines usage-based per-token pricing on its specialized code models
+  with monthly subscription credit tiers. Apply models (morph-v3-fast,
+  morph-v3-large) and the compaction and router models are billed per token or
+  per request. Subscription tiers (Free, Starter, Pro, Scale) bundle monthly
+  credits and raise rate limits. Morph Cloud Infinibranch sandboxes are billed
+  separately for compute; embeddings and rerank pricing are not published per
+  unit and fall under credit usage.
+notes: >-
+  Specialized-model rates and tier credits as published on the Morph pricing
+  page; verify the current catalog and rates on the page during reconciliation.
+sources:
+- https://morphllm.com/pricing
+- https://docs.morphllm.com
+plans:
+- id: morph-pay-as-you-go
+  name: Pay-as-you-go (Specialized Models)
+  type: usage
+  description: >-
+    Token- and request-metered usage across Morph's specialized code models,
+    drawn down against monthly credits.
+  entries:
+  - label: Morph v3 Fast (Apply)
+    name: morph_v3_fast
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: $0.80 input / $1.20 output per 1M
+    userMultiplied: false
+  - label: Morph v3 Large (Apply)
+    name: morph_v3_large
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: $0.90 input / $1.90 output per 1M
+    userMultiplied: false
+  - label: Morph WarpGrep v2 (Code Search)
+    name: morph_warp_grep_v2
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 100000
+    price: $0.80 per 100K
+    userMultiplied: false
+  - label: Morph Compact (Compaction)
+    name: morph_compact
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: $0.20 input / $0.50 output per 1M
+    userMultiplied: false
+  - label: Morph Router
+    name: morph_router
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.005 per request
+    userMultiplied: false
+  - label: Embeddings (morph-embedding-v4)
+    name: embeddings
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: drawn from monthly credits; per-unit rate not published
+    userMultiplied: false
+  - label: Rerank (morph-rerank-v3)
+    name: rerank
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: drawn from monthly credits; per-unit rate not published
+    userMultiplied: false
+  elements:
+  - name: Apply
+  - name: Embeddings
+  - name: Rerank
+  - name: Code Search
+  - name: Compaction
+- id: morph-free
+  name: Free
+  type: usage
+  description: >-
+    Free tier with monthly credits and low rate limits for evaluation.
+  entries:
+  - label: Monthly Credits
+    name: free_credits
+    type: flat
+    metric: credits
+    limit: 250000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Apply
+  - name: Embeddings
+  - name: Rerank
+- id: morph-starter
+  name: Starter
+  type: subscription
+  description: >-
+    Entry paid subscription with bundled monthly credits.
+  entries:
+  - label: Starter Subscription
+    name: starter
+    type: flat
+    metric: credits
+    limit: 3000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $20 per month
+    userMultiplied: false
+  elements:
+  - name: 3M Credits / Month
+- id: morph-pro
+  name: Pro
+  type: subscription
+  description: >-
+    Higher-volume subscription with bundled monthly credits.
+  entries:
+  - label: Pro Subscription
+    name: pro
+    type: flat
+    metric: credits
+    limit: 10000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $20 first month, then $60 per month
+    userMultiplied: false
+  elements:
+  - name: 10M Credits / Month
+- id: morph-scale
+  name: Scale
+  type: subscription
+  description: >-
+    Top subscription tier with large monthly credits and practically no rate
+    limits.
+  entries:
+  - label: Scale Subscription
+    name: scale
+    type: flat
+    metric: credits
+    limit: 80000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $400 per month
+    userMultiplied: false
+  elements:
+  - name: 80M Credits / Month
+  - name: Practically No Rate Limits
+- id: morph-cloud
+  name: Morph Cloud (Infinibranch Sandboxes)
+  type: usage
+  description: >-
+    Compute-metered Infinibranch microVM sandboxes billed separately from the
+    model credits; free to start at cloud.morph.so.
+  entries:
+  - label: Sandbox Compute
+    name: sandbox_compute
+    type: usage
+    metric: compute
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: usage-based compute; see Morph Cloud dashboard
+    userMultiplied: false
+  elements:
+  - name: Instances
+  - name: Snapshots
+  - name: Branching
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

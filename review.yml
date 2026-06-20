@@ -1,0 +1,89 @@
+aid: morph-labs
+name: Morph
+review:
+  question: Does Morph expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Per API Evangelist scope (2026-05-29), HTTP Server-Sent Events (SSE) is
+    in-scope for AsyncAPI modeling. Morph's model APIs (Apply, Embeddings,
+    Rerank) are OpenAI/Cohere-compatible REST endpoints under
+    https://api.morphllm.com/v1 and the Apply chat-completions endpoint does
+    not document a stream=true / SSE mode. The only documented SSE surface is
+    Morph Cloud's sandbox command execution (POST /instance/{id}/exec-sse),
+    which streams command output from an Infinibranch microVM rather than model
+    inference. No model-level streaming AsyncAPI document was authored because
+    no model SSE stream is documented; the sandbox exec-sse stream is infra
+    tooling exposed primarily through the morphcloud SDKs/CLI. No AsyncAPI
+    document was created.
+findings:
+  summary: |
+    Morph does not publish a documented public WebSocket API. The model
+    platform is OpenAI-compatible (Cohere-compatible for rerank) and exposes
+    only REST (HTTPS) endpoints under https://api.morphllm.com/v1: the Apply
+    endpoint reuses POST /chat/completions with morph-v3-fast / morph-v3-large
+    / auto, plus POST /embeddings and POST /rerank. The Apply endpoint does not
+    document a stream=true Server-Sent Events mode. Morph Cloud exposes a
+    separate user-scoped REST API for instances and snapshots under
+    https://cloud.morph.so/api, including a POST /instance/{id}/exec-sse
+    endpoint that streams command output as SSE - HTTP one-way streaming, not
+    WebSocket. No realtime, bidirectional, or audio WebSocket (ws:// or wss://)
+    endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.morphllm.com/v1
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://cloud.morph.so/api
+      documented: true
+      note: Morph Cloud user-scoped API for instances and snapshots.
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events on Morph Cloud POST /instance/{id}/exec-sse for streaming command output from a sandbox. Not WebSocket; not model inference. Apply chat completions does not document an SSE stream mode.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Morph's model API reference or Morph Cloud API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.morphllm.com/v1/chat/completions
+    - POST https://api.morphllm.com/v1/embeddings
+    - POST https://api.morphllm.com/v1/rerank
+    - GET  https://cloud.morph.so/api/instance
+    - POST https://cloud.morph.so/api/instance
+    - GET  https://cloud.morph.so/api/instance/{instance_id}
+    - DELETE https://cloud.morph.so/api/instance/{instance_id}
+    - POST https://cloud.morph.so/api/instance/{instance_id}/branch
+    - POST https://cloud.morph.so/api/instance/{instance_id}/exec
+    - POST https://cloud.morph.so/api/instance/{instance_id}/exec-sse
+    - POST https://cloud.morph.so/api/instance/{instance_id}/http
+    - GET  https://cloud.morph.so/api/snapshot
+    - POST https://cloud.morph.so/api/snapshot
+    - GET  https://cloud.morph.so/api/snapshot/{snapshot_id}
+    - DELETE https://cloud.morph.so/api/snapshot/{snapshot_id}
+sources:
+  - url: https://docs.morphllm.com/api-reference/endpoint/apply
+    type: APIReference
+    note: Apply endpoint is POST /v1/chat/completions with XML-tagged instruction/code/update content; no stream parameter documented.
+  - url: https://docs.morphllm.com/api-reference/endpoint/embedding
+    type: APIReference
+    note: OpenAI-compatible POST /v1/embeddings with morph-embedding-v4.
+  - url: https://docs.morphllm.com/models/rerank
+    type: Documentation
+    note: Cohere-client-compatible POST /v1/rerank with morph-rerank-v3.
+  - url: https://cloud.morph.so/docs/developers
+    type: Documentation
+    note: Morph Cloud user-scoped REST API for instances/snapshots; exec-sse streams command output as SSE, not WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The Apply chat-completions endpoint
+    does not document an SSE streaming mode, so no model-level AsyncAPI was
+    authored. The only SSE surface is Morph Cloud's sandbox command exec
+    stream, which is infrastructure tooling rather than a model interface and
+    is not modeled as AsyncAPI here.

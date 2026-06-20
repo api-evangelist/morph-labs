@@ -1,0 +1,119 @@
+aid: morph-labs
+url: https://raw.githubusercontent.com/api-evangelist/morph-labs/refs/heads/main/apis.yml
+name: Morph
+kind: company
+description: Morph builds fast models that improve AI coding agents. Its OpenAI-compatible
+  API serves the Apply (Fast Apply) model that deterministically merges LLM-generated
+  code edits into source files at 10,500+ tokens/second, plus code embeddings and
+  reranking. Morph Cloud adds Infinibranch microVM sandboxes that snapshot, branch,
+  and restore entire VM states in under 250ms for agent workloads.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Code Editing
+- Fast Apply
+- Embeddings
+- Sandboxes
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: morph-labs:morph-apply-api
+  name: Morph Apply API
+  tags:
+  - Apply
+  - Fast Apply
+  - Code Editing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.morphllm.com/api-reference/endpoint/apply
+  baseURL: https://api.morphllm.com/v1
+  properties:
+  - url: https://docs.morphllm.com/quickstart
+    type: Documentation
+  - url: https://docs.morphllm.com/api-reference/endpoint/apply
+    type: APIReference
+  - url: openapi/morph-labs-openapi.yml
+    type: OpenAPI
+  - url: collections/morph-labs.postman_collection.json
+    type: Postman
+  description: OpenAI-compatible chat-completions endpoint that merges an LLM's update
+    snippet into the original source with structure awareness, using the morph-v3-fast,
+    morph-v3-large, and auto models. Requests carry XML-tagged instruction, code, and
+    update content; the response is the fully merged file ready to write to disk.
+- aid: morph-labs:morph-embeddings-api
+  name: Morph Embeddings API
+  tags:
+  - Embeddings
+  - Vectors
+  - Code
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.morphllm.com/api-reference/endpoint/embedding
+  baseURL: https://api.morphllm.com/v1
+  properties:
+  - url: https://docs.morphllm.com/api-reference/endpoint/embedding
+    type: Documentation
+  - url: https://docs.morphllm.com/api-reference/endpoint/embedding
+    type: APIReference
+  - url: openapi/morph-labs-openapi.yml
+    type: OpenAPI
+  - url: collections/morph-labs.postman_collection.json
+    type: Postman
+  description: OpenAI-compatible embeddings endpoint producing vectors tuned for code
+    and retrieval, using the morph-embedding-v4 model with float or base64 encoding.
+- aid: morph-labs:morph-rerank-api
+  name: Morph Rerank API
+  tags:
+  - Rerank
+  - Search
+  - Retrieval
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.morphllm.com/models/rerank
+  baseURL: https://api.morphllm.com/v1
+  properties:
+  - url: https://docs.morphllm.com/models/rerank
+    type: Documentation
+  - url: openapi/morph-labs-openapi.yml
+    type: OpenAPI
+  - url: collections/morph-labs.postman_collection.json
+    type: Postman
+  description: Cohere-client-compatible reranking endpoint that scores documents (or
+    embedding IDs) against a query for code-aware retrieval, using the morph-rerank-v3
+    model with optional top_n truncation.
+- aid: morph-labs:morph-cloud-sandboxes-api
+  name: Morph Cloud Sandboxes API
+  tags:
+  - Sandboxes
+  - microVM
+  - Infinibranch
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://cloud.morph.so/docs/developers
+  baseURL: https://cloud.morph.so/api
+  properties:
+  - url: https://cloud.morph.so/docs/developers
+    type: Documentation
+  - url: https://cloud.morph.so/docs/api-reference
+    type: APIReference
+  description: Infinibranch microVM (Firecracker) sandbox infrastructure for agents -
+    a user-scoped API for managing instances and snapshots with sub-250ms branch,
+    snapshot, and restore, command exec (including SSE), and HTTP service exposure.
+    Available via the morphcloud Python and TypeScript SDKs and CLI.
+common:
+- type: GitHubOrganization
+  url: https://github.com/morphllm
+- type: GitHubOrganization
+  url: https://github.com/morph-labs
+- type: LinkedIn
+  url: https://www.linkedin.com/company/morph-labs
+- type: Website
+  url: https://morphllm.com/
+- type: Documentation
+  url: https://docs.morphllm.com
+- type: Plans
+  url: plans/morph-labs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/morph-labs-rate-limits.yml
+- type: FinOps
+  url: finops/morph-labs-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

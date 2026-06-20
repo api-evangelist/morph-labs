@@ -1,0 +1,130 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Morph
+providerId: morph-labs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Code Editing
+- Fast Apply
+- Embeddings
+- Sandboxes
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Morph spend. Morph bills usage-based per-token rates on its
+  specialized code models (Apply morph-v3-fast / morph-v3-large, code search,
+  compaction) and a per-request rate on the router, drawn down against monthly
+  subscription credits (Free, Starter, Pro, Scale). Embeddings and rerank
+  consume credits without a published per-unit rate. Morph Cloud Infinibranch
+  sandboxes are billed separately for compute.
+notes: >-
+  Per-model rates and tier credits are subject to change; verify against the
+  Morph pricing page during reconciliation.
+sources:
+- https://morphllm.com/pricing
+- https://docs.morphllm.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Morph
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Morph API
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Morph
+  PublisherName: Morph
+  InvoiceIssuerName: Morph
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: apply_input_tokens
+  description: Tokens sent to Apply models (morph-v3-fast / morph-v3-large), billed per 1M tokens per model.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: apply_output_tokens
+  description: Merged-output tokens returned by Apply models, billed per 1M tokens per model.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: code_search_tokens
+  description: Tokens processed by WarpGrep code search, billed per 100K tokens.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: compaction_tokens
+  description: Tokens processed by the compaction model, billed per 1M tokens.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: router_requests
+  description: Router invocations billed per request.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+- name: embedding_tokens
+  description: Tokens embedded via morph-embedding-v4, consuming monthly credits.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: rerank_requests
+  description: Rerank requests against morph-rerank-v3, consuming monthly credits.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: subscription_credits
+  description: Monthly credit allotment by subscription tier drawn down by model usage.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+  - tier
+- name: sandbox_compute
+  description: Morph Cloud Infinibranch sandbox compute, billed separately from model credits.
+  unit: compute
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Pull Morph dashboard usage and credit-burn exports; inspect per-model token consumption.
+- name: Allocation
+  description: Tag API keys per workload/team; map credit draw-down to internal cost centers.
+- name: Optimization
+  description: Use morph-v3-fast over morph-v3-large where accuracy allows; right-size the subscription tier to monthly credit burn; reserve Morph Cloud sandboxes for agent runs that need branching.
+- name: Accountability
+  description: Assign owners per project/key; review credit and sandbox spend monthly against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

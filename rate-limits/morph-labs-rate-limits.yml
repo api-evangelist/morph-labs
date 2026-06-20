@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Morph
+providerId: morph-labs
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Code Editing
+- Fast Apply
+- Embeddings
+- Sandboxes
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Morph enforces per-account rate limits that scale with the subscription tier.
+  The Free tier has low rate limits; Starter, Pro, and Scale progressively raise
+  them, with Scale described as having practically no rate limits. Limits are
+  expressed as requests and tokens per minute against the OpenAI-compatible
+  endpoints, and monthly credit allotments cap overall usage. Morph Cloud
+  sandboxes have separate concurrency and resource limits. Specific per-tier
+  values are not reconciled in this artifact.
+notes: >-
+  Verify per-tier RPM/TPM and credit caps in the Morph dashboard on
+  reconciliation; limits change as accounts move between Free, Starter, Pro,
+  and Scale tiers.
+sources:
+- https://morphllm.com/pricing
+- https://docs.morphllm.com
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute (RPM)
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Scales with subscription tier (Free is low; Scale is practically unlimited).
+- name: Tokens Per Minute (TPM)
+  scope: account
+  metric: tokens
+  limit: see provider documentation
+  notes: Scales with subscription tier.
+- name: Monthly Credits
+  scope: account
+  metric: credits
+  limit: 250K Free / 3M Starter / 10M Pro / 80M Scale
+  notes: Bundled monthly credit allotment caps overall usage across models.
+- name: Morph Cloud Sandboxes
+  scope: account
+  metric: instances
+  limit: see provider documentation
+  notes: Separate concurrency and compute resource limits for Infinibranch instances.
+policies:
+- name: Tiered Limits
+  description: Limits raise as accounts move from Free to Starter, Pro, and Scale subscriptions.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "Morph API",
+    "description": "OpenAI-compatible API for Morph's fast code-editing models: Apply (Fast Apply), Embeddings, and Cohere-compatible Rerank.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.morphllm.com/v1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Apply",
+      "description": "Fast Apply code merging via the OpenAI-compatible chat completions endpoint.",
+      "item": [
+        {
+          "name": "Apply a code edit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/chat/completions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "chat",
+                "completions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"morph-v3-fast\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<instruction>Add error handling</instruction>\\n<code>def run():\\n    return work()</code>\\n<update>def run():\\n    try:\\n        return work()\\n    except Exception:\\n        raise</update>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Embeddings",
+      "description": "OpenAI-compatible embeddings tuned for code.",
+      "item": [
+        {
+          "name": "Create embeddings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/embeddings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "embeddings"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"morph-embedding-v4\",\n  \"input\": \"def add(a, b):\\n    return a + b\",\n  \"encoding_format\": \"float\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rerank",
+      "description": "Cohere-client-compatible reranking for code-aware retrieval.",
+      "item": [
+        {
+          "name": "Rerank documents",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rerank",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rerank"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"morph-rerank-v3\",\n  \"query\": \"how to sort a list\",\n  \"documents\": [\n    \"sorted(items)\",\n    \"items.append(x)\",\n    \"list.sort(key=lambda i: i.value)\"\n  ],\n  \"top_n\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
