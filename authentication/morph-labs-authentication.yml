@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/morph-labs-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Morph API key supplied as a Bearer token in the Authorization header.
+  sources:
+  - openapi/morph-labs-openapi.yml
