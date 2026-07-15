@@ -98,6 +98,8 @@ apis:
     snapshot, and restore, command exec (including SSE), and HTTP service exposure.
     Available via the morphcloud Python and TypeScript SDKs and CLI.
 common:
+- type: AgenticAccess
+  url: agentic-access/morph-labs-agentic-access.yml
 - type: DomainSecurity
   url: security/morph-labs-domain-security.yml
 - type: Authentication
