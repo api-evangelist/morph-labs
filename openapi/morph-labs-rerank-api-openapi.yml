@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: Morph Apply Rerank API
+  description: OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.
+  termsOfService: https://morphllm.com/terms
+  contact:
+    name: Morph Support
+    url: https://morphllm.com/
+  version: '3.0'
+servers:
+- url: https://api.morphllm.com/v1
+security:
+- bearerAuth: []
+tags:
+- name: Rerank
+paths:
+  /rerank:
+    post:
+      operationId: rerankDocuments
+      tags:
+      - Rerank
+      summary: Rerank documents
+      description: Cohere-client-compatible reranking that scores documents (or embedding IDs) against a query and returns them ordered by relevance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RerankRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RerankResponse'
+components:
+  schemas:
+    RerankRequest:
+      type: object
+      required:
+      - model
+      - query
+      properties:
+        model:
+          type: string
+          example: morph-rerank-v3
+        query:
+          type: string
+        documents:
+          type: array
+          items:
+            type: string
+          description: Documents to rerank. Provide this or embedding_ids.
+        embedding_ids:
+          type: array
+          items:
+            type: string
+          description: Stored embedding IDs to rerank. Provide this or documents.
+        top_n:
+          type: integer
+          description: Optional maximum number of results to return.
+    RerankResponse:
+      type: object
+      properties:
+        model:
+          type: string
+          example: morph-rerank-v3
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              document:
+                type: string
+              relevance_score:
+                type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Morph API key supplied as a Bearer token in the Authorization header.

@@ -1,0 +1,99 @@
+openapi: 3.0.1
+info:
+  title: Morph Apply Embeddings API
+  description: OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.
+  termsOfService: https://morphllm.com/terms
+  contact:
+    name: Morph Support
+    url: https://morphllm.com/
+  version: '3.0'
+servers:
+- url: https://api.morphllm.com/v1
+security:
+- bearerAuth: []
+tags:
+- name: Embeddings
+paths:
+  /embeddings:
+    post:
+      operationId: createEmbeddings
+      tags:
+      - Embeddings
+      summary: Create embeddings
+      description: OpenAI-compatible embeddings endpoint producing code-tuned vectors for a string or array of strings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingResponse'
+components:
+  schemas:
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    EmbeddingRequest:
+      type: object
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          example: morph-embedding-v4
+        input:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Text or array of text strings to embed.
+        encoding_format:
+          type: string
+          enum:
+          - float
+          - base64
+          default: float
+    EmbeddingResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              object:
+                type: string
+                example: embedding
+              embedding:
+                type: array
+                items:
+                  type: number
+              index:
+                type: integer
+        model:
+          type: string
+          example: morph-embedding-v4
+        usage:
+          $ref: '#/components/schemas/Usage'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Morph API key supplied as a Bearer token in the Authorization header.

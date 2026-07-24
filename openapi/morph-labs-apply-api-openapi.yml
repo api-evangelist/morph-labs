@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: Morph Apply API
+  description: OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.
+  termsOfService: https://morphllm.com/terms
+  contact:
+    name: Morph Support
+    url: https://morphllm.com/
+  version: '3.0'
+servers:
+- url: https://api.morphllm.com/v1
+security:
+- bearerAuth: []
+tags:
+- name: Apply
+paths:
+  /chat/completions:
+    post:
+      operationId: applyEdit
+      tags:
+      - Apply
+      summary: Apply a code edit (Fast Apply)
+      description: OpenAI-compatible chat completions used as the Apply endpoint. Send a single user message whose content contains XML-tagged <instruction>, <code>, and <update> sections. The model merges the update into the original code and returns the fully merged file as the assistant message content.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletion'
+components:
+  schemas:
+    ChatCompletion:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+          example: morph-v3-fast
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/Message'
+              finish_reason:
+                type: string
+                example: stop
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    ApplyRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+          description: Apply model to use.
+          enum:
+          - morph-v3-fast
+          - morph-v3-large
+          - auto
+          example: morph-v3-fast
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          description: A single user message whose content holds the XML-tagged <instruction>, <code>, and <update> sections.
+    Message:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+          - system
+          example: user
+        content:
+          type: string
+          example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Morph API key supplied as a Bearer token in the Authorization header.
