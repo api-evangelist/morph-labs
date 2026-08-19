@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Morph Apply Rerank API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rerank",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rerank documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.morphllm.com/v1/rerank",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cohere-client-compatible reranking that scores documents (or embedding IDs) against a query and returns them ordered by relevance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

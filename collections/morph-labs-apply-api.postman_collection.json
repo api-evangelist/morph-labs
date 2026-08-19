@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "5ddf7288-777f-44bc-a661-d73f045ff800",
+      "name": "Apply",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab8727ab-96b3-4e2b-9db0-bbe96ba9ab0f",
+          "name": "Apply a code edit (Fast Apply)",
+          "request": {
+            "name": "Apply a code edit (Fast Apply)",
+            "description": {
+              "content": "OpenAI-compatible chat completions used as the Apply endpoint. Send a single user message whose content contains XML-tagged <instruction>, <code>, and <update> sections. The model merges the update into the original code and returns the fully merged file as the assistant message content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92ddf806-f3ba-42d5-8811-60f9475210f7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"morph-v3-fast\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"<instruction>Add error handling</instruction> <code>def run():\\\\n    return work()</code> <update>def run():\\\\n    try:\\\\n        return work()\\\\n    except Exception as e:\\\\n        raise</update>\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"<instruction>Add error handling</instruction> <code>def run():\\\\n    return work()</code> <update>def run():\\\\n    try:\\\\n        return work()\\\\n    except Exception as e:\\\\n        raise</update>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"chat.completion\",\n  \"created\": 1986,\n  \"model\": \"morph-v3-fast\",\n  \"choices\": [\n    {\n      \"index\": 2726,\n      \"message\": {\n        \"role\": \"user\",\n        \"content\": \"<instruction>Add error handling</instruction> <code>def run():\\\\n    return work()</code> <update>def run():\\\\n    try:\\\\n        return work()\\\\n    except Exception as e:\\\\n        raise</update>\"\n      },\n      \"finish_reason\": \"stop\"\n    },\n    {\n      \"index\": 7899,\n      \"message\": {\n        \"role\": \"user\",\n        \"content\": \"<instruction>Add error handling</instruction> <code>def run():\\\\n    return work()</code> <update>def run():\\\\n    try:\\\\n        return work()\\\\n    except Exception as e:\\\\n        raise</update>\"\n      },\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 5224,\n    \"completion_tokens\": 6947,\n    \"total_tokens\": 5890\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.morphllm.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d1913417-2010-4a69-98e4-c919b5a9560b",
+    "name": "Morph Apply API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.\n\nContact Support:\n Name: Morph Support",
+      "type": "text/plain"
+    }
+  }
+}

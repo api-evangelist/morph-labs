@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "10decb20-a2fa-4b1c-a7ff-748446848530",
+      "name": "Rerank",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67cf09ad-06e6-432a-ae3f-ae9a09486867",
+          "name": "Rerank documents",
+          "request": {
+            "name": "Rerank documents",
+            "description": {
+              "content": "Cohere-client-compatible reranking that scores documents (or embedding IDs) against a query and returns them ordered by relevance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rerank"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"query\": \"<string>\",\n  \"documents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embedding_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"top_n\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aed43e16-f2ab-4b20-9c63-9eab8d15dd07",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rerank"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"morph-rerank-v3\",\n  \"query\": \"<string>\",\n  \"documents\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"embedding_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"top_n\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model\": \"morph-rerank-v3\",\n  \"results\": [\n    {\n      \"index\": 9243,\n      \"document\": \"string\",\n      \"relevance_score\": 2253.155694257597\n    },\n    {\n      \"index\": 1623,\n      \"document\": \"string\",\n      \"relevance_score\": 8839.920303844476\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.morphllm.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "807dba47-f6f8-4ab3-ac1c-9efa6969f6eb",
+    "name": "Morph Apply Rerank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.\n\nContact Support:\n Name: Morph Support",
+      "type": "text/plain"
+    }
+  }
+}
