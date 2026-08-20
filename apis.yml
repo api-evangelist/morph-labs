@@ -22,6 +22,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/morph-labs.png
 tags:
+- Artificial Intelligence
+- Code Editing
+- Fast Apply
+- Embeddings
+- Sandboxes
+tags_raw:
 - AI
 - Code Editing
 - Fast Apply
@@ -34,6 +40,10 @@ apis:
 - aid: morph-labs:morph-cloud-sandboxes-api
   name: Morph Cloud Sandboxes API
   tags:
+  - Sandboxes
+  - MicroVM
+  - Infinibranch
+  tags_raw:
   - Sandboxes
   - microVM
   - Infinibranch
