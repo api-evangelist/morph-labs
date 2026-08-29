@@ -7,6 +7,18 @@ description: Morph builds fast models that improve AI coding agents. Its OpenAI-
   code edits into source files at 10,500+ tokens/second, plus code embeddings and
   reranking. Morph Cloud adds Infinibranch microVM sandboxes that snapshot, branch,
   and restore entire VM states in under 250ms for agent workloads.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
