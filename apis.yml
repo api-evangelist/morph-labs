@@ -53,7 +53,7 @@ apis:
   name: Morph Cloud Sandboxes API
   tags:
   - Sandboxes
-  - MicroVM
+  - microVM
   - Infinibranch
   tags_raw:
   - Sandboxes
