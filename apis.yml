@@ -39,7 +39,7 @@ tags:
 - Code Editing
 - Fast Apply
 - Embeddings
-- Sandboxes
+- Sandbox
 tags_raw:
 - AI
 - Code Editing
@@ -53,7 +53,7 @@ apis:
 - aid: morph-labs:morph-cloud-sandboxes-api
   name: Morph Cloud Sandboxes API
   tags:
-  - Sandboxes
+  - Sandbox
   - MicroVM
   - Infinibranch
   tags_raw:
