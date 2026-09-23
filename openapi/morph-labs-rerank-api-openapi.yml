@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Morph Apply Rerank API
+  title: Morph Rerank API
   description: OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.
   termsOfService: https://morphllm.com/terms
   contact:
@@ -36,6 +36,23 @@ paths:
                 $ref: '#/components/schemas/RerankResponse'
 components:
   schemas:
+    RerankResponse:
+      type: object
+      properties:
+        model:
+          type: string
+          example: morph-rerank-v3
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              document:
+                type: string
+              relevance_score:
+                type: number
     RerankRequest:
       type: object
       required:
@@ -60,23 +77,6 @@ components:
         top_n:
           type: integer
           description: Optional maximum number of results to return.
-    RerankResponse:
-      type: object
-      properties:
-        model:
-          type: string
-          example: morph-rerank-v3
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              document:
-                type: string
-              relevance_score:
-                type: number
   securitySchemes:
     bearerAuth:
       type: http

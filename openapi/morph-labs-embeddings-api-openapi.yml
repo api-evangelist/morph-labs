@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Morph Apply Embeddings API
+  title: Morph Embeddings API
   description: OpenAI-compatible API for Morph's fast code-editing models. The Apply model deterministically merges an LLM's update snippet into source code via the chat completions endpoint, alongside code embeddings and Cohere-compatible reranking. Authenticate with a Bearer API key.
   termsOfService: https://morphllm.com/terms
   contact:
@@ -45,28 +45,6 @@ components:
           type: integer
         total_tokens:
           type: integer
-    EmbeddingRequest:
-      type: object
-      required:
-      - model
-      - input
-      properties:
-        model:
-          type: string
-          example: morph-embedding-v4
-        input:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Text or array of text strings to embed.
-        encoding_format:
-          type: string
-          enum:
-          - float
-          - base64
-          default: float
     EmbeddingResponse:
       type: object
       properties:
@@ -92,6 +70,28 @@ components:
           example: morph-embedding-v4
         usage:
           $ref: '#/components/schemas/Usage'
+    EmbeddingRequest:
+      type: object
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          example: morph-embedding-v4
+        input:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Text or array of text strings to embed.
+        encoding_format:
+          type: string
+          enum:
+          - float
+          - base64
+          default: float
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,9 +1,7 @@
 {
   "provider": "morph-labs",
   "sources": [
-    "morph-labs-apply-api-openapi.yml",
-    "morph-labs-embeddings-api-openapi.yml",
-    "morph-labs-rerank-api-openapi.yml"
+    "_original/morph-labs-openapi.yml"
   ],
   "outputs": [
     "morph-labs-apply-api-openapi.yml",
@@ -13,6 +11,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "morph-labs-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "morph-labs-openapi.yml: declared missing tag: Apply",
+    "morph-labs-openapi.yml: declared missing tag: Embeddings",
+    "morph-labs-openapi.yml: declared missing tag: Rerank",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "morph-labs-apply-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "morph-labs-embeddings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "morph-labs-rerank-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
