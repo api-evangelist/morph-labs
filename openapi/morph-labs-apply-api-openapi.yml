@@ -52,15 +52,6 @@ components:
         content:
           type: string
           example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
     ChatCompletion:
       type: object
       properties:
@@ -88,6 +79,15 @@ components:
                 example: stop
         usage:
           $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
     ApplyRequest:
       type: object
       required:

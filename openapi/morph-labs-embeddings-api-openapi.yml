@@ -36,15 +36,6 @@ paths:
                 $ref: '#/components/schemas/EmbeddingResponse'
 components:
   schemas:
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
     EmbeddingResponse:
       type: object
       properties:
@@ -70,6 +61,15 @@ components:
           example: morph-embedding-v4
         usage:
           $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
     EmbeddingRequest:
       type: object
       required:
