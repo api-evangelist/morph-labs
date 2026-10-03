@@ -36,22 +36,25 @@ paths:
                 $ref: '#/components/schemas/ChatCompletion'
 components:
   schemas:
-    Message:
+    ApplyRequest:
       type: object
       required:
-      - role
-      - content
+      - model
+      - messages
       properties:
-        role:
+        model:
           type: string
+          description: Apply model to use.
           enum:
-          - user
-          - assistant
-          - system
-          example: user
-        content:
-          type: string
-          example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
+          - morph-v3-fast
+          - morph-v3-large
+          - auto
+          example: morph-v3-fast
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          description: A single user message whose content holds the XML-tagged <instruction>, <code>, and <update> sections.
     ChatCompletion:
       type: object
       properties:
@@ -79,6 +82,22 @@ components:
                 example: stop
         usage:
           $ref: '#/components/schemas/Usage'
+    Message:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+          - system
+          example: user
+        content:
+          type: string
+          example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
     Usage:
       type: object
       properties:
@@ -88,25 +107,6 @@ components:
           type: integer
         total_tokens:
           type: integer
-    ApplyRequest:
-      type: object
-      required:
-      - model
-      - messages
-      properties:
-        model:
-          type: string
-          description: Apply model to use.
-          enum:
-          - morph-v3-fast
-          - morph-v3-large
-          - auto
-          example: morph-v3-fast
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-          description: A single user message whose content holds the XML-tagged <instruction>, <code>, and <update> sections.
   securitySchemes:
     bearerAuth:
       type: http
