@@ -1,0 +1,26 @@
+slug: morph-labs
+provider: Morph
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Apply
+  spec_file: morph-labs-apply-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.72
+  evidence: POST /chat/completions  applyEdit  Apply a code edit (Fast Apply)
+  reason: The operation deterministically merges an LLM's update snippet into source code, i.e. it performs
+    software implementation work on a codebase. Software Construction Management is the closest fit; confidence
+    moderated because the capability emphasises source control and code review rather than code generation,
+    and only one operation is exposed.
