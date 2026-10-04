@@ -36,23 +36,6 @@ paths:
                 $ref: '#/components/schemas/RerankResponse'
 components:
   schemas:
-    RerankResponse:
-      type: object
-      properties:
-        model:
-          type: string
-          example: morph-rerank-v3
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              document:
-                type: string
-              relevance_score:
-                type: number
     RerankRequest:
       type: object
       required:
@@ -77,6 +60,23 @@ components:
         top_n:
           type: integer
           description: Optional maximum number of results to return.
+    RerankResponse:
+      type: object
+      properties:
+        model:
+          type: string
+          example: morph-rerank-v3
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              document:
+                type: string
+              relevance_score:
+                type: number
   securitySchemes:
     bearerAuth:
       type: http

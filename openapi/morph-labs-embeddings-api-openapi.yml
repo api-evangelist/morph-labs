@@ -36,28 +36,6 @@ paths:
                 $ref: '#/components/schemas/EmbeddingResponse'
 components:
   schemas:
-    EmbeddingRequest:
-      type: object
-      required:
-      - model
-      - input
-      properties:
-        model:
-          type: string
-          example: morph-embedding-v4
-        input:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          description: Text or array of text strings to embed.
-        encoding_format:
-          type: string
-          enum:
-          - float
-          - base64
-          default: float
     EmbeddingResponse:
       type: object
       properties:
@@ -83,6 +61,28 @@ components:
           example: morph-embedding-v4
         usage:
           $ref: '#/components/schemas/Usage'
+    EmbeddingRequest:
+      type: object
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          example: morph-embedding-v4
+        input:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Text or array of text strings to embed.
+        encoding_format:
+          type: string
+          enum:
+          - float
+          - base64
+          default: float
     Usage:
       type: object
       properties:

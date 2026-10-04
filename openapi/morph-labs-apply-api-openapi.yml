@@ -36,6 +36,22 @@ paths:
                 $ref: '#/components/schemas/ChatCompletion'
 components:
   schemas:
+    Message:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - user
+          - assistant
+          - system
+          example: user
+        content:
+          type: string
+          example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
     ApplyRequest:
       type: object
       required:
@@ -55,6 +71,15 @@ components:
           items:
             $ref: '#/components/schemas/Message'
           description: A single user message whose content holds the XML-tagged <instruction>, <code>, and <update> sections.
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
     ChatCompletion:
       type: object
       properties:
@@ -82,31 +107,6 @@ components:
                 example: stop
         usage:
           $ref: '#/components/schemas/Usage'
-    Message:
-      type: object
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          enum:
-          - user
-          - assistant
-          - system
-          example: user
-        content:
-          type: string
-          example: <instruction>Add error handling</instruction> <code>def run():\n    return work()</code> <update>def run():\n    try:\n        return work()\n    except Exception as e:\n        raise</update>
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http
