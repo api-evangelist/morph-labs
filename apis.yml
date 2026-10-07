@@ -139,6 +139,8 @@ apis:
   - type: Documentation
     url: https://docs.morphllm.com/models/rerank
 common:
+- type: Pricing
+  url: https://www.morphllm.com/pricing
 - type: CapabilityMap
   url: capabilities/morph-labs-capability-edges.yml
   name: Morph Business Capability Map
