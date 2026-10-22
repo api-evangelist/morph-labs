@@ -16,13 +16,13 @@ edges:
       router_ids:
       - morph
       tools_share: 0.0
-      structured_output_share: 0.5
+      structured_output_share: 1.0
     inference-host:
-      models: 7
+      models: 8
       router_ids:
       - Morph
-      tools_share: 0.71
-      structured_output_share: 0.86
+      tools_share: 0.75
+      structured_output_share: 1.0
   matched_by: verified-token-table
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
@@ -62,7 +62,7 @@ edges:
     note: 'morph-labs declares OpenAI compatibility: ''description: OpenAI-compatible API for Morph''s fast code-editing
       models. The Apply model deterministically merges an LLM''s update snippet into source code via t'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
 generated: '2026-10-13'
