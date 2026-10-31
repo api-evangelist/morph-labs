@@ -1,4 +1,4 @@
-# Morph (morph-labs)
+# Morph
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,115 +66,121 @@
 
 Morph builds fast models that improve AI coding agents. Its OpenAI-compatible API serves the Apply (Fast Apply) model that deterministically merges LLM-generated code edits into source files at 10,500+ tokens/second, plus code embeddings and reranking. Morph Cloud adds Infinibranch microVM sandboxes that snapshot, branch, and restore entire VM states in under 250ms for agent workloads.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/morph-labs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/morph-labs/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Code Editing · Fast Apply · Embeddings · Sandbox
 
-## Tags
+## Morph on APIs.io
 
-- AI
-- Code Editing
-- Fast Apply
-- Embeddings
-- Sandboxes
+Everything profiled for Morph is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/morph-labs/](https://apis.io/providers/morph-labs/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Morph Cloud Sandboxes API](https://apis.io/apis/morph-labs/morph-cloud-sandboxes-api/) — Infinibranch microVM (Firecracker) sandbox infrastructure for agents - a user-scoped API for managing instances and snapshots with sub-250ms branch,…
+- [Morph Apply API](https://apis.io/apis/morph-labs/morph-labs-apply-api/) — The Apply API from Morph — 1 operation(s) for apply.
+- [Morph Embeddings API](https://apis.io/apis/morph-labs/morph-labs-embeddings-api/) — The Embeddings API from Morph — 1 operation(s) for embeddings.
+- [Morph Rerank API](https://apis.io/apis/morph-labs/morph-labs-rerank-api/) — The Rerank API from Morph — 1 operation(s) for rerank.
 
-## APIs
+### Published properties
 
-### Morph Apply API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenAI-compatible chat-completions endpoint that merges an LLM's update snippet into the original source with structure awareness, using the morph-v3-fast, morph-v3-large, and auto models. Requests carry XML-tagged instruction, code, and update content; the response is the fully merged file ready to write to disk.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.morphllm.com/api-reference/endpoint/apply](https://docs.morphllm.com/api-reference/endpoint/apply)
-- **Base URL:** `https://api.morphllm.com/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Morph Labs Agentic Access](https://apis.io/agentic-access/morph-labs/morph-labs-agentic-access/)
 
-- Apply
-- Fast Apply
-- Code Editing
+#### Collections (4)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.morphllm.com/quickstart)
-- [API Reference](https://docs.morphllm.com/api-reference/endpoint/apply)
-- [OpenAPI](openapi/morph-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/morph-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/morph-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Morph API](https://apis.io/collections/morph-labs/open-morph-labs/)
+- [Morph Apply API](https://apis.io/collections/morph-labs/open-morph-labs-apply-api/)
+- [Morph Apply Embeddings API](https://apis.io/collections/morph-labs/open-morph-labs-embeddings-api/)
+- [Morph Apply Rerank API](https://apis.io/collections/morph-labs/open-morph-labs-rerank-api/)
 
-### Morph Embeddings API
+#### Security (2)
 
-OpenAI-compatible embeddings endpoint producing vectors tuned for code and retrieval, using the morph-embedding-v4 model with float or base64 encoding.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.morphllm.com/api-reference/endpoint/embedding](https://docs.morphllm.com/api-reference/endpoint/embedding)
-- **Base URL:** `https://api.morphllm.com/v1`
+- [Morph Labs Authentication](https://apis.io/security/morph-labs/morph-labs-authentication/)
+- [Morph Labs Domain Security](https://apis.io/security/morph-labs/morph-labs-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Embeddings
-- Vectors
-- Code
+Published plans, tiers and prices.
 
-#### Properties
+- [Morph Labs Plans Pricing](https://apis.io/plans/morph-labs/morph-labs-plans-pricing/)
 
-- [Documentation](https://docs.morphllm.com/api-reference/endpoint/embedding)
-- [API Reference](https://docs.morphllm.com/api-reference/endpoint/embedding)
-- [OpenAPI](openapi/morph-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/morph-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/morph-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Morph Rerank API
+Published request limits.
 
-Cohere-client-compatible reranking endpoint that scores documents (or embedding IDs) against a query for code-aware retrieval, using the morph-rerank-v3 model with optional top_n truncation.
+- [Morph Labs Rate Limits](https://apis.io/rate-limits/morph-labs/morph-labs-rate-limits/)
 
-- **Human URL:** [https://docs.morphllm.com/models/rerank](https://docs.morphllm.com/models/rerank)
-- **Base URL:** `https://api.morphllm.com/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Rerank
-- Search
-- Retrieval
+- [Morph Labs Finops](https://apis.io/finops/morph-labs/morph-labs-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.morphllm.com/models/rerank)
-- [OpenAPI](openapi/morph-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/morph-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/morph-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Morph Cloud Sandboxes API
-
-Infinibranch microVM (Firecracker) sandbox infrastructure for agents - a user-scoped API for managing instances and snapshots with sub-250ms branch, snapshot, and restore, command exec (including SSE), and HTTP service exposure. Available via the morphcloud Python and TypeScript SDKs and CLI.
-
-- **Human URL:** [https://cloud.morph.so/docs/developers](https://cloud.morph.so/docs/developers)
-- **Base URL:** `https://cloud.morph.so/api`
-
-#### Tags
-
-- Sandboxes
-- microVM
-- Infinibranch
-
-#### Properties
-
-- [Documentation](https://cloud.morph.so/docs/developers)
-- [API Reference](https://cloud.morph.so/docs/api-reference)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/morphllm)
-- [GitHub Organization](https://github.com/morph-labs)
-- [LinkedIn](https://www.linkedin.com/company/morph-labs)
 - [Website](https://morphllm.com/)
 - [Documentation](https://docs.morphllm.com)
-- [Plans](plans/morph-labs-plans-pricing.yml)
-- [Rate Limits](rate-limits/morph-labs-rate-limits.yml)
-- [Fin Ops](finops/morph-labs-finops.yml)
+- [Pricing](https://www.morphllm.com/pricing)
+- [GitHub](https://github.com/morphllm)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 42.1 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/morph-labs/](https://apis.io/providers/morph-labs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Morph: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/morph-labs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
